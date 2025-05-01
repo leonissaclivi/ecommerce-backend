@@ -1,9 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
+const cors = require('cors');
 
 const app = express()
 app.use(express.json());
+
+const corsOptions = {
+    origin: 'http://localhost:5174',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization','token'],
+  };
+
+app.use(cors(corsOptions));
+
+
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{

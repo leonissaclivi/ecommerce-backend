@@ -50,7 +50,6 @@ const userLogin = async (req, res, next) => {
 
 const adminLogin = async (req,res) => {
     try {
-        console.log("Route hit!");
         const {email, password} = req.body;
     if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
         token = jwt.sign(email+password, process.env.secret_key);

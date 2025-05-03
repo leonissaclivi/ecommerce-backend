@@ -9,10 +9,16 @@ const userCreate = async (req, res, next) => {
         const hashedPassword = bcrypt.hashSync(password, 10);
 
         const newUser = new User({
-            username, password: hashedPassword, email, mobile
+            username, password: hashedPassword, email, mobile,  cartData: new Map()
         });
+        console.log('Pre-save:', newUser.cartData);
         await newUser.save();
         res.json({ message: 'User registered successfully.' })
+
+
+        const savedUser = await User.findById(newUser._id);
+        console.log('Post-save:', savedUser.cartData)
+        
     } catch (error) {
         next(error)
     }

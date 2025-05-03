@@ -23,6 +23,14 @@ mongoose.connect(process.env.MONGO_URI)
 })
 .catch(err=>console.log(err))
 
+mongoose.connection.on('connected', () => {
+    console.log('MongoDB connected to:', mongoose.connection.db.databaseName);
+  });
+  
+  mongoose.connection.on('disconnected', () => {
+    console.log('MongoDB disconnected');
+  });
+
 app.get('/', (req, res) => {
     res.send('Hello World')
 })

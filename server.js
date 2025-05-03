@@ -38,9 +38,11 @@ app.get('/', (req, res) => {
 const userRouter = require('./routes/userRoutes');
 const productRouter = require('./routes/productRoutes');
 const cartRouter = require('./routes/cartRoutes')
+const orderRouter = require('./routes/orderRoutes')
 app.use('/api/auth',userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
+app.use('/api/order',orderRouter);
 
 const port = process.env.PORT;
 

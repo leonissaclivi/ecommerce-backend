@@ -12,6 +12,8 @@ const middleware = async (req,res,next)=>{
             return res.status(401).json({ msg: 'Token is not valid' });
           }
         req.user = decoded.user;
+        console.log(req.user.id);
+        
         next();
     } catch (error) {
         res.status(401).json({message:'Invalid token'});

@@ -7,7 +7,7 @@ const router = express.Router();
 
 //Admin features
 router.post('/list', adminAuth, allOrders);
-router.get('/status', adminAuth, updateStatus);
+router.post('/status', adminAuth, updateStatus);
 
 //Payment features
 router.post('/place', middleware, placeOrder);

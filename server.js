@@ -6,8 +6,14 @@ const cors = require('cors');
 const app = express()
 app.use(express.json());
 
+const allowedOrigins = [
+  'http://localhost:5174',
+  'https://ecommerce-adminpanel-sandy.vercel.app/',
+  'https://ecommerce-adminpanel-git-main-leon-issac-livis-projects.vercel.app/'
+];
+
 const corsOptions = {
-    origin: 'http://localhost:5174',
+    origin: allowedOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization','token'],

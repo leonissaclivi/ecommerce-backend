@@ -8,18 +8,48 @@ app.use(express.json());
 
 const allowedOrigins = [
   'http://localhost:5174',
-  'https://ecommerce-adminpanel-sandy.vercel.app/',
-  'https://ecommerce-adminpanel-git-main-leon-issac-livis-projects.vercel.app/'
+  'https://ecommerce-adminpanel-sandy.vercel.app',
+  'https://ecommerce-adminpanel-git-main-leon-issac-livis-projects.vercel.app'
 ];
 
 const corsOptions = {
-    origin: allowedOrigins,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization','token'],
-  };
+  origin: function (origin, callback) {
+    
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization', 'token'],
+  optionsSuccessStatus: 200 
+};
+
 
 app.use(cors(corsOptions));
+
+
+app.options('*', cors(corsOptions));
+
+
+// const allowedOrigins = [
+//   'http://localhost:5174',
+//   'https://ecommerce-adminpanel-sandy.vercel.app/',
+//   'https://ecommerce-adminpanel-git-main-leon-issac-livis-projects.vercel.app/'
+// ];
+
+// const corsOptions = {
+//     origin: allowedOrigins,
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization','token'],
+//   };
+
+// app.use(cors(corsOptions));
 
 
 

@@ -11,7 +11,8 @@ const allowedOrigins = [
   'http://localhost:5174',
   'https://ecommerce-adminpanel-sandy.vercel.app',
   'https://ecommerce-adminpanel-git-main-leon-issac-livis-projects.vercel.app',
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'https://ecommerce-frontend-psi-lilac.vercel.app/'
 ];
 
 const corsOptions = {

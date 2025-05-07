@@ -9,7 +9,7 @@ router.post('/add',adminAuth,upload.fields([{name:'image1',maxCount:1},{name:'im
 
 router.post('/remove',adminAuth, removeProducts);
 
-router.get('/single', singleProduct);
+router.post('/single', singleProduct);
 
 router.post('/list', listProducts);
 module.exports = router;

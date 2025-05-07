@@ -1,9 +1,11 @@
 const users = require('../models/UserModel');
 const mongoose = require('mongoose');
+const Product = require('../models/ProductModel');
 
 const addToCart = async (req, res) => {
     try {
-        const { userId, itemId } = req.body;
+        const userId = req.user.id;
+        const { itemId } = req.body;
         console.log("request recieved");
 
 
@@ -37,7 +39,8 @@ const addToCart = async (req, res) => {
 
 const updateCart = async (req, res) => {
     try {
-        const { userId, itemId, quantity } = req.body;
+        const userId = req.user.id;
+        const { itemId, quantity } = req.body;
         const userData = await users.findById(userId);
         let cartData = await userData.cartData || {};
 
@@ -58,18 +61,33 @@ const updateCart = async (req, res) => {
 
 const getUserCart = async (req, res) => {
     try {
-        const { userId } = req.body;
-        
-        const userData = await users.findById(userId);
-        let cartData = await userData.cartData || {};
-
-        res.json({ success: true, cartData });
-
+      const userId = req.user.id;
+      const userData = await users.findById(userId);
+      const cartData = userData.cartData || {};
+  
+      const enrichedCart = [];
+  
+      
+      for (const itemId in cartData) {
+        const product = await Product.findById(itemId);
+        if (product) {
+          enrichedCart.push({
+            itemId,
+            name: product.name,
+            price: product.price,
+            image: product.image[0], 
+            quantity: cartData[itemId],
+            total: product.price * cartData[itemId],
+          });
+        }
+      }
+  
+      return res.json({ success: true, cart: enrichedCart });
     } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message })
+      console.error(error);
+      res.json({ success: false, message: error.message });
     }
-
-}
+  };
+  
 
 module.exports = { addToCart, updateCart, getUserCart }

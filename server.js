@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express()
 app.use(express.json());
@@ -9,7 +10,8 @@ app.use(express.json());
 const allowedOrigins = [
   'http://localhost:5174',
   'https://ecommerce-adminpanel-sandy.vercel.app',
-  'https://ecommerce-adminpanel-git-main-leon-issac-livis-projects.vercel.app'
+  'https://ecommerce-adminpanel-git-main-leon-issac-livis-projects.vercel.app',
+  'http://localhost:5173'
 ];
 
 const corsOptions = {
@@ -31,6 +33,8 @@ const corsOptions = {
 
 
 app.use(cors(corsOptions));
+
+app.use(cookieParser());
 
 
 // const allowedOrigins = [

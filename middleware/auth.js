@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 
 const middleware = async (req,res,next)=>{
-    const {token} = req.headers;
+    // const {token} = req.headers;
+    const token = req.cookies.token; 
     if(!token){
         return res.status(401).json({message:'No token, Authorization revoked'});
     }

@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/add', middleware, addToCart);
 
-router.get('/get', middleware, getUserCart);
+router.post('/get', middleware, getUserCart);
 
 router.post('/update', middleware, updateCart);
 

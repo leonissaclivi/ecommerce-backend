@@ -125,9 +125,10 @@ const deleteUser = async (req, res, next) => {
 
 const logoutUser = (req, res) => {
     res.clearCookie('token', {
+        path : '/',
       httpOnly: true,
-      secure: true, // true if using HTTPS
-      sameSite: 'Lax' // or 'None' if cross-site
+      secure: true,
+      sameSite: 'None'
     });
     res.status(200).json({ message: 'Logged out successfully' });
   };
